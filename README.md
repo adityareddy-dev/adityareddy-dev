@@ -1,22 +1,25 @@
-# Hey, I'm Aditya 👋
+# Aditya Reddy
 
-I build things for the web, measure why they're slow, and occasionally fix it. My proudest contribution to software engineering so far is a library whose entire job is pointing fingers.
+I work on browser performance and OpenTelemetry.
 
-- 🔭 Currently rewriting the [OpenTelemetry demo](https://github.com/open-telemetry/opentelemetry-demo)'s recommendation service in Spring Boot 4, with the matching Helm chart and docs PRs to go with it
-- ⚡ Sending fixes and docs PRs to [Next.js](https://github.com/vercel/next.js), mostly around Web Vitals and the App Router
-- 📊 Big believer that "it feels slow" should compile down to a number with a name attached
-- 🌐 Website: [adityareddy.dev](https://adityareddy.dev)
+## Recent
 
-## react-inp-blame
+- [OpenTelemetry demo #3966](https://github.com/open-telemetry/opentelemetry-demo/pull/3966): rewrote the recommendation service in Spring Boot 4. Merged 2026-10-13 by [Juliano Costa](https://github.com/julianocosta89). [Docs #11667](https://github.com/open-telemetry/opentelemetry.io/pull/11667) and [Helm chart #2398](https://github.com/open-telemetry/opentelemetry-helm-charts/pull/2398) are still open.
+- [OpenTelemetry JS #7153](https://github.com/open-telemetry/opentelemetry-js/pull/7153): removed the `pagehide` listener from the trace and log SDKs.
+- [OpenTelemetry browser #467](https://github.com/open-telemetry/opentelemetry-browser/pull/467): fixed sibling counting in CSS `nth-child` selectors.
 
-When a click, tap or key press in your React app is slow, [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame) names the component or the handler behind it and says where the time went. Blame, but with evidence.
+## Libraries
 
-```
-npm install react-inp-blame
-```
+- [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame) `1.0.0`: connects browser timing data to the React tree for INP attribution.
+- [otel-js-upgrade](https://github.com/adityareddy-dev/otel-js-upgrade) `0.1.3`: rewrites OpenTelemetry JS SDK 2.x code for 3.0.
+- [otel-zoneless-context](https://github.com/adityareddy-dev/otel-zoneless-context) `0.1.1`: browser context manager without zone.js, with a bundler plugin that restores context after `await`.
 
-[Try the demo](https://adityareddy.dev/react-inp-blame/). Everything in it is slow on purpose, which is the only time I will ever say that about my code.
+## Upstream
 
-## Toolbox
+Member of the [OpenTelemetry GitHub org](https://github.com/open-telemetry/community/issues/3758) since 2026-10-08.
 
-React, Next.js, TypeScript, Java and Spring Boot, OpenTelemetry, and an unhealthy amount of the browser's Performance tab.
+I contribute to OpenTelemetry's [demo](https://github.com/open-telemetry/opentelemetry-demo), [JavaScript SDK](https://github.com/open-telemetry/opentelemetry-js), [browser SDK](https://github.com/open-telemetry/opentelemetry-browser), [Helm charts](https://github.com/open-telemetry/opentelemetry-helm-charts), [docs](https://github.com/open-telemetry/opentelemetry.io), and [ecosystem explorer](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer). Also [Prometheus Helm charts](https://github.com/prometheus-community/helm-charts), with PRs open at [Next.js](https://github.com/vercel/next.js) and [MDN](https://github.com/mdn/content).
+
+## Contact
+
+[adityareddy.dev](https://adityareddy.dev), [LinkedIn](https://www.linkedin.com/in/adityareddy-dev), [X @adityareddydev](https://x.com/adityareddydev).
