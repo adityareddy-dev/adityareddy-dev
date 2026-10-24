@@ -427,6 +427,11 @@ def section_head_draw(c, n, name, cmd, y):
     c.text(PAD, y + 54, "$ " + cmd, 13, DIM)
 
 
+def place(c, tile, x, y):
+    """Draw a finished tile canvas into a section canvas at (x, y); the section background shows through the gutters."""
+    c.add(f'<g transform="translate({x:g} {y:g})">' + "".join(tile.parts) + "</g>")
+
+
 # ---------------------------------------------------------------- sections
 def boot(doc, d):
     h = 290
@@ -457,27 +462,26 @@ def boot(doc, d):
 def links_rows(doc):
     n = len(LINKS)
     gap, tw, h = 8, 128, 84
-    sec = section_head(doc, "01", "links", "ping adityareddy-dev --all-channels")
-    doc.row([doc.image("head-links.svg", sec)])
-    items, x = [], 0
+    head = 92
+    c = Canvas(WIDTH, head + h + 26, 0, doc.y, left=True, right=True, top=True, label="01 links")
+    section_head_draw(c, "01", "links", "ping adityareddy-dev --all-channels", 22)
+    x = 0
     for i, (k, name, handle, url) in enumerate(LINKS):
         lp = PAD if i == 0 else gap // 2
         rp = PAD if i == n - 1 else gap // 2
         w = lp + tw + rp
-        c = Canvas(w, h + 26, x, doc.y, left=i == 0, right=i == n - 1, label=f"{name} {handle}")
-        tile_shape(c, lp, 0, tw, h)
-        c.add(f'<g color="{ACC}"><rect x="{lp + 14}" y="14.5" width="22" height="22" rx="4" fill="none" stroke="{SOFT}"/>'
+        t = Canvas(w, h)
+        tile_shape(t, lp, 0, tw, h)
+        t.add(f'<g color="{ACC}"><rect x="{lp + 14}" y="14.5" width="22" height="22" rx="4" fill="none" stroke="{SOFT}"/>'
               f'<g transform="translate({lp + 18} {18.5})">{GLYPHS[k]}</g></g>')
-        c.text(lp + 44, 30, name, 14, WH, 700)
+        t.text(lp + 44, 30, name, 14, WH, 700)
         px = 10.5
         maxc = int((tw - 24) // (px * CW))
-        parts = split_handle(handle, maxc)
-        for j, p in enumerate(parts):
-            c.text(lp + 12, 54 + j * 14, p, px, DIM)
-        items.append(doc.image(f"link-{k}.svg", c, url))
+        for j, part in enumerate(split_handle(handle, maxc)):
+            t.text(lp + 12, 54 + j * 14, part, px, DIM)
+        place(c, t, x, head)
         x += w
-    # last row of links also closes the section bottom padding (included above)
-    doc.row(items)
+    doc.row([doc.image("links.svg", c, "https://adityareddy.dev")])
 
 
 def split_handle(s, maxc):
@@ -638,63 +642,63 @@ def skyline(doc, d, v):
 
 
 def upstream_rows(doc, d):
-    sec = section_head(doc, "04", "upstream", "gh pr list --author adityareddy-dev --state merged --org open-telemetry")
-    doc.row([doc.image("head-upstream.svg", sec)])
     gap, tw, h = 8, 264, 98
+    head = 92
+    c = Canvas(WIDTH, head + 2 * h + gap + 26, 0, doc.y, left=True, right=True, top=True, label="04 upstream")
+    section_head_draw(c, "04", "upstream", "gh pr list --author adityareddy-dev --state merged --org open-telemetry", 22)
     for r in range(2):
-        items, x = [], 0
+        x = 0
         for i in range(3):
             u = d["upstream"][r * 3 + i]
             lp = PAD if i == 0 else gap // 2
             rp = PAD if i == 2 else gap // 2
             w = lp + tw + rp
-            bottom = 26 if r == 1 else gap
-            c = Canvas(w, h + bottom, x, doc.y, left=i == 0, right=i == 2, label=f"{u['full']}: {u['merged']} merged of {u['opened']} opened")
-            tile_shape(c, lp, 0, tw, h)
+            t = Canvas(w, h)
+            tile_shape(t, lp, 0, tw, h)
             nm = u["label"]
             size = min(14, (tw - 28) / (CW * len(nm)))
-            c.text(lp + 14, 28, nm, size, SOFT, 700)
-            c.text(lp + 14, 62, fmt(u["merged"]), 24, ACC, 700)
+            t.text(lp + 14, 28, nm, size, SOFT, 700)
+            t.text(lp + 14, 62, fmt(u["merged"]), 24, ACC, 700)
             ox = lp + 14 + len(fmt(u["merged"])) * 24 * CW + 8
-            c.text(ox, 62, f"merged · {u['opened']} opened", 11.5, DIM)
-            c.text(lp + 14, 84, fit(u["caption"], 11.5, tw - 28), 11.5, DIM)
-            items.append(doc.image(f"up-{r * 3 + i + 1}.svg", c, f"https://github.com/{u['full']}/pulls?q=is%3Apr+author%3A{USER}"))
+            t.text(ox, 62, f"merged · {u['opened']} opened", 11.5, DIM)
+            t.text(lp + 14, 84, fit(u["caption"], 11.5, tw - 28), 11.5, DIM)
+            place(c, t, x, head + r * (h + gap))
             x += w
-        doc.row(items)
+    doc.row([doc.image("upstream.svg", c, "https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged")])
 
 
 def project_rows(doc, d, v):
-    sec = section_head(doc, "05", "projects", "ls -l ~/projects")
-    doc.row([doc.image("head-projects.svg", sec)])
     projs = [project_card(v, *p) for p in PROJECTS]
     gap, tw, h = 8, 400, 124
+    head = 92
+    c = Canvas(WIDTH, head + 2 * h + gap + 26, 0, doc.y, left=True, right=True, top=True, label="05 projects")
+    section_head_draw(c, "05", "projects", "ls -l ~/projects", 22)
     for r in range(2):
-        items, x = [], 0
+        x = 0
         for i in range(2):
             name, tag, desc, lang, stars_n, url = projs[r * 2 + i]
             lp = PAD if i == 0 else gap // 2
             rp = PAD if i == 1 else gap // 2
             w = lp + tw + rp
-            bottom = 26 if r == 1 else gap
-            c = Canvas(w, h + bottom, x, doc.y, left=i == 0, right=i == 1, label=f"{name}: {desc}")
-            tile_shape(c, lp, 0, tw, h)
+            t = Canvas(w, h)
+            tile_shape(t, lp, 0, tw, h)
             nm = fit(name, 14, tw - 28 - 24 - len(tag) * 10 * CW - 30)
-            c.text(lp + 14, 30, nm, 14, SOFT, 700)
-            arrow(c, lp + 14 + len(nm) * 14 * CW + 6, 20, 8)
+            t.text(lp + 14, 30, nm, 14, SOFT, 700)
+            arrow(t, lp + 14 + len(nm) * 14 * CW + 6, 20, 8)
             tx = lp + tw - 14 - len(tag) * 10 * CW - 12
-            c.add(f'<rect x="{tx:g}" y="16" width="{len(tag) * 10 * CW + 12:g}" height="18" fill="none" stroke="{SOFT}"/>')
-            c.text(tx + 6, 29, tag, 10, SOFT, ls=".6")
+            t.add(f'<rect x="{tx:g}" y="16" width="{len(tag) * 10 * CW + 12:g}" height="18" fill="none" stroke="{SOFT}"/>')
+            t.text(tx + 6, 29, tag, 10, SOFT, ls=".6")
             for j, ln in enumerate(wrap(desc, 12.5, tw - 28, 3)):
-                c.text(lp + 14, 56 + j * 18, ln, 12.5, FG)
+                t.text(lp + 14, 56 + j * 18, ln, 12.5, FG)
             ty = 112
             label = (lang + " · ") if lang else ""
-            c.text(lp + 14, ty, label, 11.5, DIM)
+            t.text(lp + 14, ty, label, 11.5, DIM)
             sx = lp + 14 + len(label) * 11.5 * CW
-            star(c, sx + 5, ty - 4, 5)
-            c.text(sx + 14, ty, str(stars_n), 11.5, ACC)
-            items.append(doc.image(f"proj-{r * 2 + i + 1}.svg", c, url))
+            star(t, sx + 5, ty - 4, 5)
+            t.text(sx + 14, ty, str(stars_n), 11.5, ACC)
+            place(c, t, x, head + r * (h + gap))
             x += w
-        doc.row(items)
+    doc.row([doc.image("projects.svg", c, "https://github.com/adityareddy-dev?tab=repositories")])
 
 
 def stack(doc):
@@ -717,11 +721,13 @@ def stack(doc):
 
 
 def writing_rows(doc, d):
-    sec = section_head(doc, "07", "writing", "tail -n 5 ~/dev.to/posts.log  # auto-updated")
-    doc.row([doc.image("head-writing.svg", sec)])
+    head, rowh, more = 92, 30, 56
+    n = len(d["writing"])
+    c = Canvas(WIDTH, head + n * rowh + more, 0, doc.y, left=True, right=True, top=True, label="07 writing")
+    section_head_draw(c, "07", "writing", "tail -n 5 ~/dev.to/posts.log  # auto-updated", 22)
     for i, p in enumerate(d["writing"]):
-        c = Canvas(WIDTH, 30, 0, doc.y, left=True, right=True, label=p["title"])
-        y = 20
+        oy = head + i * rowh
+        y = oy + 20
         c.text(PAD, y, p["date"], 13, DIM)
         c.text(PAD + 10 * 13 * CW + 10, y, "›", 13, DIM)
         tx = PAD + 10 * 13 * CW + 30
@@ -738,11 +744,10 @@ def writing_rows(doc, d):
         hx = rxx - len(rc) * 11.5 * CW - 4 - 12
         heart(c, hx, y - 10, 12)
         c.text(tx, y, fit(p["title"], 13, hx - 14 - tx), 13, FG)
-        doc.row([doc.image(f"post-{i + 1}.svg", c, p["url"])])
-    c = Canvas(WIDTH, 56, 0, doc.y, left=True, right=True, label="read all articles on DEV")
-    c.add(f'<text x="{PAD}" y="30" font-size="13" fill="{ACC}">&gt;&gt; read all articles on DEV</text>')
-    arrow(c, PAD + len(">> read all articles on DEV") * 13 * CW + 8, 20, 9, ACC)
-    doc.row([doc.image("more.svg", c, "https://dev.to/adityareddy_dev")])
+    my = head + n * rowh
+    c.add(f'<text x="{PAD}" y="{my + 30}" font-size="13" fill="{ACC}">&gt;&gt; read all articles on DEV</text>')
+    arrow(c, PAD + len(">> read all articles on DEV") * 13 * CW + 8, my + 20, 9, ACC)
+    doc.row([doc.image("writing.svg", c, "https://dev.to/adityareddy_dev")])
 
 
 def exit_block(doc):
@@ -769,10 +774,8 @@ def build(d):
     return doc, v
 
 
-def img_tag(it, ver, total):
-    # percentage widths so the strips scale with the column; the row sums to 99.6% of it
-    pct = math.floor(it["w"] / total * 99.6 * 100) / 100
-    t = (f'<img align="top" src="profile/out/{it["file"]}?v={ver[it["file"]]}" width="{pct:g}%" alt="{esc(it["alt"])}">')
+def img_tag(it, ver):
+    t = f'<img align="top" src="profile/out/{it["file"]}?v={ver[it["file"]]}" width="100%" alt="{esc(it["alt"])}">'
     return f'<a href="{it["href"]}">{t}</a>' if it["href"] else t
 
 
@@ -826,11 +829,8 @@ def main():
         with open(os.path.join(OUT, name), "w", encoding="utf-8") as fh:
             fh.write(svg)
         ver[name] = hashlib.sha1(svg.encode()).hexdigest()[:8]
-    lines = []
-    for row in doc.rows:
-        tot = sum(it["w"] for it in row)
-        lines.append("".join(img_tag(it, ver, tot) for it in row))
-    block = (START + '\n<p align="center">\n' + "<br>\n".join(lines) + "\n</p>\n\n"
+    tags = "".join(img_tag(it, ver) for row in doc.rows for it in row)
+    block = (START + '\n<p align="center">' + tags + "</p>\n\n"
              "<details><summary>Text version</summary>\n\n" + text_version(d, v) + "\n\n</details>\n" + END)
     with open(README, encoding="utf-8") as fh:
         cur = fh.read()
