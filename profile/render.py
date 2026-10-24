@@ -158,21 +158,6 @@ def fetch():
     user = gh_get(f"/users/{USER}", tok)
     repos = gh_paged(f"/users/{USER}/repos?type=owner", tok)
 
-    since = now - dt.timedelta(days=365)
-    iso = lambda d: d.strftime("%Y-%m-%dT%H:%M:%SZ")
-    FIELDS = "totalCommitContributions totalIssueContributions totalPullRequestContributions totalPullRequestReviewContributions"
-    sumf = lambda c: sum(c[k] for k in FIELDS.split())
-    q = f'''query {{ user(login:"{USER}") {{ contributionsCollection(from:"{iso(since)}", to:"{iso(now)}") {{
-      {FIELDS} contributionYears }} }} }}'''
-    cc = gql(q, tok)["user"]["contributionsCollection"]
-    contrib365 = sumf(cc)
-    parts = []
-    for y in cc["contributionYears"]:
-        a = f"{y}-01-01T00:00:00Z"
-        b = f"{y}-12-31T23:59:59Z" if y < now.year else iso(now)
-        parts.append(f'y{y}: contributionsCollection(from:"{a}", to:"{b}") {{ {FIELDS} }}')
-    yd = gql(f'query {{ user(login:"{USER}") {{ {" ".join(parts)} }} }}', tok)["user"]
-    alltime = sum(sumf(c) for c in yd.values())
     pub_days = public_days(repos, tok, now)
 
     prs_all = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr"), tok)["total_count"]
@@ -203,7 +188,7 @@ def fetch():
     posts = http(f"https://dev.to/api/articles?username=adityareddy_dev&per_page=5")
     writing = [{"date": p["published_at"][:10], "title": p["title"], "reactions": p["positive_reactions_count"],
                 "comments": p["comments_count"], "url": p["url"]} for p in posts[:5]]
-    return {"now": now, "user": user, "repos": repos, "contrib365": contrib365, "pub_days": pub_days, "alltime": alltime, "prs": prs_all,
+    return {"now": now, "user": user, "repos": repos, "pub_days": pub_days, "prs": prs_all,
             "merged": prs_merged, "upstream": upstream, "writing": writing}
 
 
@@ -247,7 +232,7 @@ def derive(d):
         "stars": sum(r["stargazers_count"] for r in own), "forks": sum(r["forks_count"] for r in own),
         "days": days, "streak": cur, "longest": longest, "langs": top, "other": other,
         "member": f"{created.strftime('%b %Y')} ({yrs}y)",
-        "active": sum(1 for x in days if x[1] > 0), "busiest": busiest,
+        "active": sum(1 for x in days if x[1] > 0), "total": sum(x[1] for x in days), "busiest": busiest,
         "repo_by_name": {r["name"]: r for r in repos},
     }
 
@@ -514,7 +499,7 @@ def stats(doc, d, v):
     section_head_draw(c, "02", "stats", "gh stats --user adityareddy-dev", 22)
     tiles = [
         ("TOTAL STARS", fmt(v["stars"]), "across all repos"),
-        ("CONTRIBUTIONS · 365D", fmt(d["contrib365"]), f"{fmt(d['alltime'])} public, all time"),
+        ("CONTRIBUTIONS · 365D", fmt(v["total"]), f"active {v['active']} of {len(v['days'])} days"),
         ("PULL REQUESTS", fmt(d["prs"]), f"{fmt(d['merged'])} merged"),
         ("CURRENT STREAK", f"{v['streak']}d", f"longest: {v['longest']}d"),
     ]
@@ -642,7 +627,7 @@ def skyline(doc, d, v):
         c.add(f'<rect x="{x:g}" y="{fy - 10}" width="10" height="10" fill="{col}" stroke="rgba(57,255,20,.25)" stroke-width=".5"/>')
         x += 14
     c.text(x + 4, fy, "skyscraper", 12, DIM)
-    c.text(WIDTH - PAD, fy, f"{fmt(sum(counts))} public contributions · last 365 days", 12, SOFT, anchor="end")
+    c.text(WIDTH - PAD, fy, f"{fmt(v['total'])} public contributions · last 365 days", 12, SOFT, anchor="end")
     bd = v["busiest"]
     try:
         bdate = dt.date.fromisoformat(bd[0]).strftime("%b %-d, %Y")
@@ -800,7 +785,7 @@ def text_version(d, v):
         L.append(f"- [{name}: {handle}]({url})")
     L.append("\n**Stats**\n")
     L += [f"- Stars across repos: {fmt(v['stars'])}",
-          f"- Contributions, last 365 days: {fmt(d['contrib365'])} ({fmt(d['alltime'])} public, all time)",
+          f"- Contributions, last 365 days: {fmt(v['total'])} (active {v['active']} of {len(v['days'])} days)",
           f"- Pull requests: {fmt(d['prs'])} ({fmt(d['merged'])} merged)",
           f"- Streak: {v['streak']} days current, {v['longest']} longest",
           f"- Followers: {fmt(d['user']['followers'])}, forks: {fmt(v['forks'])}, public repos: {fmt(d['user']['public_repos'])}, member since {v['member']}",
@@ -857,7 +842,7 @@ def main():
         fh.write(new)
     sizes = {n: len(s.encode()) for n, s in doc.files.items()}
     print(json.dumps({
-        "stars": v["stars"], "contrib365": d["contrib365"], "alltime": d["alltime"], "day_sum": sum(x[1] for x in v["days"]), "busiest": v["busiest"], "active": v["active"], "api_calls": CALLS["n"],
+        "stars": v["stars"], "contrib365": v["total"], "busiest": v["busiest"], "active": v["active"], "api_calls": CALLS["n"],
         "prs": d["prs"], "merged": d["merged"], "streak": v["streak"], "longest": v["longest"],
         "followers": d["user"]["followers"], "forks": v["forks"], 
         "upstream": {u["label"]: [u["merged"], u["opened"]] for u in d["upstream"]},
