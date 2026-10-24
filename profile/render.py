@@ -85,7 +85,11 @@ def token():
     return t
 
 
+CALLS = {"n": 0}
+
+
 def http(url, data=None, headers=None):
+    CALLS["n"] += 1
     h = {"User-Agent": "profile-render", "Accept": "application/vnd.github+json"}
     h.update(headers or {})
     req = urllib.request.Request(url, data=data, headers=h)
@@ -121,6 +125,33 @@ def search_prs(q, tok):
     return gh_paged("/search/issues?q=" + urllib.parse.quote(q), tok, key="items")
 
 
+def public_days(repos, tok, now):
+    """Per-day counts from public data only: commits in his public non-fork repos, plus PRs and issues opened."""
+    since = (now - dt.timedelta(days=370)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    counts = {}
+
+    def bump(ts):
+        day = ts[:10]
+        counts[day] = counts.get(day, 0) + 1
+    for r in repos:
+        if r["fork"] or r["archived"] or r["private"]:
+            continue
+        try:
+            items = gh_paged(f"/repos/{r['full_name']}/commits?author={USER}&since={since}", tok)
+        except urllib.error.HTTPError as e:
+            if e.code == 409:  # empty repository
+                continue
+            raise
+        for it in items:
+            bump(it["commit"]["author"]["date"])
+    day0 = since[:10]
+    for kind in ("pr", "issue"):
+        q = f"author:{USER} is:{kind} is:public created:>={day0}"
+        for it in search_prs(q, tok):
+            bump(it["created_at"])
+    return counts
+
+
 def fetch():
     tok = token()
     now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
@@ -129,19 +160,20 @@ def fetch():
 
     since = now - dt.timedelta(days=365)
     iso = lambda d: d.strftime("%Y-%m-%dT%H:%M:%SZ")
+    FIELDS = "totalCommitContributions totalIssueContributions totalPullRequestContributions totalPullRequestReviewContributions"
+    sumf = lambda c: sum(c[k] for k in FIELDS.split())
     q = f'''query {{ user(login:"{USER}") {{ contributionsCollection(from:"{iso(since)}", to:"{iso(now)}") {{
-      contributionCalendar {{ totalContributions weeks {{ contributionDays {{ date contributionCount weekday }} }} }}
-      contributionYears }} }} }}'''
+      {FIELDS} contributionYears }} }} }}'''
     cc = gql(q, tok)["user"]["contributionsCollection"]
-    cal = cc["contributionCalendar"]
-    years = cc["contributionYears"]
+    contrib365 = sumf(cc)
     parts = []
-    for y in years:
+    for y in cc["contributionYears"]:
         a = f"{y}-01-01T00:00:00Z"
         b = f"{y}-12-31T23:59:59Z" if y < now.year else iso(now)
-        parts.append(f'y{y}: contributionsCollection(from:"{a}", to:"{b}") {{ contributionCalendar {{ totalContributions }} }}')
+        parts.append(f'y{y}: contributionsCollection(from:"{a}", to:"{b}") {{ {FIELDS} }}')
     yd = gql(f'query {{ user(login:"{USER}") {{ {" ".join(parts)} }} }}', tok)["user"]
-    alltime = sum(v["contributionCalendar"]["totalContributions"] for v in yd.values())
+    alltime = sum(sumf(c) for c in yd.values())
+    pub_days = public_days(repos, tok, now)
 
     prs_all = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr"), tok)["total_count"]
     prs_merged = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr is:merged"), tok)["total_count"]
@@ -171,7 +203,7 @@ def fetch():
     posts = http(f"https://dev.to/api/articles?username=adityareddy_dev&per_page=5")
     writing = [{"date": p["published_at"][:10], "title": p["title"], "reactions": p["positive_reactions_count"],
                 "comments": p["comments_count"], "url": p["url"]} for p in posts[:5]]
-    return {"now": now, "user": user, "repos": repos, "cal": cal, "alltime": alltime, "prs": prs_all,
+    return {"now": now, "user": user, "repos": repos, "contrib365": contrib365, "pub_days": pub_days, "alltime": alltime, "prs": prs_all,
             "merged": prs_merged, "upstream": upstream, "writing": writing}
 
 
@@ -195,10 +227,11 @@ def streaks(days):
 def derive(d):
     repos = d["repos"]
     own = [r for r in repos if not r["fork"]]
+    today = d["now"].date()
     days = []
-    for w in d["cal"]["weeks"]:
-        for x in w["contributionDays"]:
-            days.append((x["date"], x["contributionCount"], x["weekday"]))
+    for k in range(365):
+        day = today - dt.timedelta(days=364 - k)
+        days.append((day.isoformat(), d["pub_days"].get(day.isoformat(), 0), (day.weekday() + 1) % 7))
     days.sort()
     cur, longest = streaks(days)
     langs = {}
@@ -481,7 +514,7 @@ def stats(doc, d, v):
     section_head_draw(c, "02", "stats", "gh stats --user adityareddy-dev", 22)
     tiles = [
         ("TOTAL STARS", fmt(v["stars"]), "across all repos"),
-        ("CONTRIBUTIONS · 365D", fmt(d["cal"]["totalContributions"]), f"{fmt(d['alltime'])} all time"),
+        ("CONTRIBUTIONS · 365D", fmt(d["contrib365"]), f"{fmt(d['alltime'])} public, all time"),
         ("PULL REQUESTS", fmt(d["prs"]), f"{fmt(d['merged'])} merged"),
         ("CURRENT STREAK", f"{v['streak']}d", f"longest: {v['longest']}d"),
     ]
@@ -556,19 +589,17 @@ def quant_levels(counts):
 
 def skyline(doc, d, v):
     W, H, OX, OY = 8, 4, 56, 70
-    days = v["days"][-(52 * 7):]
-    # arrange into week columns
-    weeks = [days[i:i + 7] for i in range(0, len(days), 7)]
+    days = v["days"]
     counts = [x[1] for x in days]
     lvl = quant_levels(counts)
-    mx = max(counts) or 1
+    today = d["now"].date()
+    first = today - dt.timedelta(days=(today.weekday() + 1) % 7 + 51 * 7)  # Sunday starting the 52nd week back
     cells = []
-    for i, wk in enumerate(weeks[:52]):
-        for k, x in enumerate(wk):
-            j = x[2] if len(wk) == 7 else k
-            L = lvl(x[1])
-            hgt = [1, 5, 10, 16, 24][L] + (x[1] % 3 if L else 0)
-            cells.append((i, j, L, hgt))
+    for date, n, wd in days:
+        i = (dt.date.fromisoformat(date) - first).days // 7
+        if 0 <= i < 52:
+            L = lvl(n)
+            cells.append((i, wd, L, [1, 5, 10, 16, 24][L] + (n % 3 if L else 0)))
     cells.sort(key=lambda t: (t[0] + t[1], t[1]))
 
     def shade(col, f):
@@ -611,7 +642,7 @@ def skyline(doc, d, v):
         c.add(f'<rect x="{x:g}" y="{fy - 10}" width="10" height="10" fill="{col}" stroke="rgba(57,255,20,.25)" stroke-width=".5"/>')
         x += 14
     c.text(x + 4, fy, "skyscraper", 12, DIM)
-    c.text(WIDTH - PAD, fy, f"{fmt(d['cal']['totalContributions'])} contributions · last 365 days", 12, SOFT, anchor="end")
+    c.text(WIDTH - PAD, fy, f"{fmt(sum(counts))} public contributions · last 365 days", 12, SOFT, anchor="end")
     bd = v["busiest"]
     try:
         bdate = dt.date.fromisoformat(bd[0]).strftime("%b %-d, %Y")
@@ -769,7 +800,7 @@ def text_version(d, v):
         L.append(f"- [{name}: {handle}]({url})")
     L.append("\n**Stats**\n")
     L += [f"- Stars across repos: {fmt(v['stars'])}",
-          f"- Contributions, last 365 days: {fmt(d['cal']['totalContributions'])} ({fmt(d['alltime'])} all time)",
+          f"- Contributions, last 365 days: {fmt(d['contrib365'])} ({fmt(d['alltime'])} public, all time)",
           f"- Pull requests: {fmt(d['prs'])} ({fmt(d['merged'])} merged)",
           f"- Streak: {v['streak']} days current, {v['longest']} longest",
           f"- Followers: {fmt(d['user']['followers'])}, forks: {fmt(v['forks'])}, public repos: {fmt(d['user']['public_repos'])}, member since {v['member']}",
@@ -826,7 +857,7 @@ def main():
         fh.write(new)
     sizes = {n: len(s.encode()) for n, s in doc.files.items()}
     print(json.dumps({
-        "stars": v["stars"], "contrib365": d["cal"]["totalContributions"], "alltime": d["alltime"],
+        "stars": v["stars"], "contrib365": d["contrib365"], "alltime": d["alltime"], "day_sum": sum(x[1] for x in v["days"]), "busiest": v["busiest"], "active": v["active"], "api_calls": CALLS["n"],
         "prs": d["prs"], "merged": d["merged"], "streak": v["streak"], "longest": v["longest"],
         "followers": d["user"]["followers"], "forks": v["forks"], 
         "upstream": {u["label"]: [u["merged"], u["opened"]] for u in d["upstream"]},
