@@ -49,7 +49,16 @@ PROJECTS = [
     ("deskstudio", "OPEN SOURCE", "Your own design studio inside the coding agent you already use."),
     ("react-inp-blame", "DEVTOOLS", "Connects slow browser interactions to the React renders and handlers behind them."),
     ("otel-js-upgrade", "OPEN SOURCE", "npx otel-js-upgrade 3 rewrites OpenTelemetry JS SDK 2.x code to 3.0 as a reviewable diff."),
+    ("adityareddy-dev.github.io", "SITE", "Personal site and writing index."),
 ]
+# repo name -> (shown name, link) where the card is not a plain repo link
+PROJECT_OVERRIDE = {"adityareddy-dev.github.io": ("adityareddy.dev", "https://adityareddy.dev")}
+
+
+def project_card(v, name, tag, desc):
+    r = v["repo_by_name"].get(name, {})
+    shown, url = PROJECT_OVERRIDE.get(name, (name, f"https://github.com/{USER}/{name}"))
+    return shown, tag, desc, r.get("language") or "", r.get("stargazers_count", 0), url
 STACK = [
     ("languages", ["TypeScript", "JavaScript", "Python", "Java"]),
     ("frameworks", ["React", "Spring Boot", "Helm"]),
@@ -186,10 +195,6 @@ def streaks(days):
 def derive(d):
     repos = d["repos"]
     own = [r for r in repos if not r["fork"]]
-    names = {p[0] for p in PROJECTS}
-    cands = [r for r in own if r["name"] not in names and r["name"] != USER and (r.get("description") or "").strip()]
-    cands.sort(key=lambda r: (r["stargazers_count"], r["pushed_at"] or ""), reverse=True)
-    fourth = cands[0]
     days = []
     for w in d["cal"]["weeks"]:
         for x in w["contributionDays"]:
@@ -208,7 +213,7 @@ def derive(d):
     return {
         "stars": sum(r["stargazers_count"] for r in own), "forks": sum(r["forks_count"] for r in own),
         "days": days, "streak": cur, "longest": longest, "langs": top, "other": other,
-        "member": f"{created.strftime('%b %Y')} ({yrs}y)", "fourth": fourth,
+        "member": f"{created.strftime('%b %Y')} ({yrs}y)",
         "active": sum(1 for x in days if x[1] > 0), "busiest": busiest,
         "repo_by_name": {r["name"]: r for r in repos},
     }
@@ -645,17 +650,12 @@ def upstream_rows(doc, d):
 def project_rows(doc, d, v):
     sec = section_head(doc, "05", "projects", "ls -l ~/projects")
     doc.row([doc.image("head-projects.svg", sec)])
-    f = v["fourth"]
-    projs = []
-    for name, tag, desc in PROJECTS:
-        r = v["repo_by_name"].get(name, {})
-        projs.append((name, tag, desc, r.get("language") or "", r.get("stargazers_count", 0)))
-    projs.append((f["name"], "OPEN SOURCE", f["description"], f["language"] or "", f["stargazers_count"]))
+    projs = [project_card(v, *p) for p in PROJECTS]
     gap, tw, h = 8, 400, 124
     for r in range(2):
         items, x = [], 0
         for i in range(2):
-            name, tag, desc, lang, stars_n = projs[r * 2 + i]
+            name, tag, desc, lang, stars_n, url = projs[r * 2 + i]
             lp = PAD if i == 0 else gap // 2
             rp = PAD if i == 1 else gap // 2
             w = lp + tw + rp
@@ -676,10 +676,9 @@ def project_rows(doc, d, v):
             sx = lp + 14 + len(label) * 11.5 * CW
             star(c, sx + 5, ty - 4, 5)
             c.text(sx + 14, ty, str(stars_n), 11.5, ACC)
-            items.append(doc.image(f"proj-{r * 2 + i + 1}.svg", c, f"https://github.com/{USER}/{name}"))
+            items.append(doc.image(f"proj-{r * 2 + i + 1}.svg", c, url))
             x += w
         doc.row(items)
-    return f
 
 
 def stack(doc):
@@ -777,11 +776,9 @@ def text_version(d, v):
     for u in d["upstream"]:
         L.append(f"- [{u['label']}](https://github.com/{u['full']}/pulls?q=is%3Apr+author%3A{USER}): {u['merged']} merged of {u['opened']} opened, {clean(u['caption'])}")
     L.append("\n**Projects**\n")
-    for name, tag, desc in PROJECTS:
-        r = v["repo_by_name"].get(name, {})
-        L.append(f"- [{name}](https://github.com/{USER}/{name}): {desc} ({r.get('stargazers_count', 0)} stars)")
-    f = v["fourth"]
-    L.append(f"- [{f['name']}](https://github.com/{USER}/{f['name']}): {clean(f['description'])} ({f['stargazers_count']} stars)")
+    for pr in PROJECTS:
+        name, tag, desc, lang, stars_n, url = project_card(v, *pr)
+        L.append(f"- [{name}]({url}): {desc} ({stars_n} stars)")
     L.append("\n**Stack**\n")
     for lab, chips in STACK:
         L.append(f"- {lab}: {', '.join(chips)}")
@@ -828,7 +825,7 @@ def main():
     print(json.dumps({
         "stars": v["stars"], "contrib365": d["cal"]["totalContributions"], "alltime": d["alltime"],
         "prs": d["prs"], "merged": d["merged"], "streak": v["streak"], "longest": v["longest"],
-        "followers": d["user"]["followers"], "forks": v["forks"], "fourth": [v["fourth"]["name"], v["fourth"]["stargazers_count"]],
+        "followers": d["user"]["followers"], "forks": v["forks"], 
         "upstream": {u["label"]: [u["merged"], u["opened"]] for u in d["upstream"]},
         "max_svg_bytes": max(sizes.values()), "files": len(sizes)}, indent=1))
 
