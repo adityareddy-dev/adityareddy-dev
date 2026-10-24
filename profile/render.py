@@ -753,8 +753,10 @@ def build(d):
     return doc, v
 
 
-def img_tag(it, ver):
-    t = f'<img align="top" src="profile/out/{it["file"]}?v={ver[it["file"]]}" width="{it["w"]}" height="{it["h"]}" alt="{esc(it["alt"])}">'
+def img_tag(it, ver, total):
+    # percentage widths so the strips scale with the column; the row sums to 99.6% of it
+    pct = math.floor(it["w"] / total * 99.6 * 100) / 100
+    t = (f'<img align="top" src="profile/out/{it["file"]}?v={ver[it["file"]]}" width="{pct:g}%" alt="{esc(it["alt"])}">')
     return f'<a href="{it["href"]}">{t}</a>' if it["href"] else t
 
 
@@ -810,7 +812,8 @@ def main():
         ver[name] = hashlib.sha1(svg.encode()).hexdigest()[:8]
     lines = []
     for row in doc.rows:
-        lines.append("".join(img_tag(it, ver) for it in row))
+        tot = sum(it["w"] for it in row)
+        lines.append("".join(img_tag(it, ver, tot) for it in row))
     block = (START + '\n<p align="center">\n' + "<br>\n".join(lines) + "\n</p>\n\n"
              "<details><summary>Text version</summary>\n\n" + text_version(d, v) + "\n\n</details>\n" + END)
     with open(README, encoding="utf-8") as fh:
