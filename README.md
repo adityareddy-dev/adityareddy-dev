@@ -3,8 +3,8 @@
 <img align="top" src="profile/out/boot.svg?v=ddd258d1" width="99.6%" alt="boot, SYS://ADITYAREDDY.DEV"><br>
 <img align="top" src="profile/out/head-links.svg?v=6178830f" width="99.6%" alt="01 links"><br>
 <a href="https://github.com/adityareddy-dev"><img align="top" src="profile/out/link-gh.svg?v=480a0a80" width="19.01%" alt="GitHub adityareddy-dev"></a><a href="https://www.linkedin.com/in/adityareddy-dev"><img align="top" src="profile/out/link-in.svg?v=b5b3fbfd" width="15.39%" alt="LinkedIn in/adityareddy-dev"></a><a href="https://x.com/adityareddydev"><img align="top" src="profile/out/link-x.svg?v=9ffe3ab1" width="15.39%" alt="X @adityareddydev"></a><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/link-dev.svg?v=26981292" width="15.39%" alt="DEV @adityareddy_dev"></a><a href="https://www.reddit.com/user/Disastrous-Town-4820"><img align="top" src="profile/out/link-rd.svg?v=961cbaac" width="15.39%" alt="Reddit u/Disastrous-Town-4820"></a><a href="mailto:hello@adityareddy.dev"><img align="top" src="profile/out/link-mail.svg?v=5510e406" width="19.01%" alt="Email hello@adityareddy.dev"></a><br>
-<img align="top" src="profile/out/stats.svg?v=9eeb6317" width="99.6%" alt="stats"><br>
-<img align="top" src="profile/out/skyline.svg?v=da43ee42" width="99.6%" alt="contribution skyline, one building per day"><br>
+<img align="top" src="profile/out/stats.svg?v=ae6e80b1" width="99.6%" alt="stats"><br>
+<img align="top" src="profile/out/skyline.svg?v=8cb1acae" width="99.6%" alt="contribution skyline, one building per day"><br>
 <img align="top" src="profile/out/head-upstream.svg?v=53cd424b" width="99.6%" alt="04 upstream"><br>
 <a href="https://github.com/open-telemetry/opentelemetry-demo/pulls?q=is%3Apr+author%3Aadityareddy-dev"><img align="top" src="profile/out/up-1.svg?v=b3802492" width="34.4%" alt="open-telemetry/opentelemetry-demo: 2 merged of 2 opened"></a><a href="https://github.com/open-telemetry/opentelemetry-js/pulls?q=is%3Apr+author%3Aadityareddy-dev"><img align="top" src="profile/out/up-2.svg?v=89cd6f8b" width="30.78%" alt="open-telemetry/opentelemetry-js: 1 merged of 3 opened"></a><a href="https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev"><img align="top" src="profile/out/up-3.svg?v=80632de5" width="34.4%" alt="open-telemetry/opentelemetry-browser: 8 merged of 15 opened"></a><br>
 <a href="https://github.com/open-telemetry/opentelemetry-helm-charts/pulls?q=is%3Apr+author%3Aadityareddy-dev"><img align="top" src="profile/out/up-4.svg?v=ae444d90" width="34.4%" alt="open-telemetry/opentelemetry-helm-charts: 3 merged of 6 opened"></a><a href="https://github.com/open-telemetry/opentelemetry.io/pulls?q=is%3Apr+author%3Aadityareddy-dev"><img align="top" src="profile/out/up-5.svg?v=ef5840d0" width="30.78%" alt="open-telemetry/opentelemetry.io: 2 merged of 5 opened"></a><a href="https://github.com/prometheus-community/helm-charts/pulls?q=is%3Apr+author%3Aadityareddy-dev"><img align="top" src="profile/out/up-6.svg?v=e273a84a" width="34.4%" alt="prometheus-community/helm-charts: 1 merged of 2 opened"></a><br>
@@ -39,8 +39,8 @@
 **Stats**
 
 - Stars across repos: 47
-- Contributions, last 365 days: 4,271 (6,521 public, all time)
-- Pull requests: 176 (118 merged)
+- Contributions, last 365 days: 4,274 (6,524 public, all time)
+- Pull requests: 162 (108 merged)
 - Streak: 86 days current, 86 longest
 - Followers: 41, forks: 41, public repos: 71, member since Apr 2021 (5y)
 - Top languages: Python (13), HTML (4), Jupyter Notebook (4), TypeScript (4), JavaScript (3)
