@@ -15,7 +15,6 @@
 - [LinkedIn: in/adityareddy-dev](https://www.linkedin.com/in/adityareddy-dev)
 - [X: @adityareddydev](https://x.com/adityareddydev)
 - [DEV: @adityareddy_dev](https://dev.to/adityareddy_dev)
-- [Reddit: u/Disastrous-Town-4820](https://www.reddit.com/user/Disastrous-Town-4820)
 - [Email: hello@adityareddy.dev](mailto:hello@adityareddy.dev)
 
 **Stats**
