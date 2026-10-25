@@ -1,5 +1,5 @@
 <!-- console:start -->
-<p align="center"><img align="top" src="profile/out/boot.svg?v=ddd258d1" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=6c0a5f28" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=4eadc059" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=0ed97948" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=b7c6f003" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=c90195a8" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8159abd6" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=43820e7b" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=9efd6c87" width="100%" alt="exit"></p>
+<p align="center"><img align="top" src="profile/out/boot.svg?v=ddd258d1" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=6c0a5f28" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=f519bbf5" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=7b92d6ec" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=b7c6f003" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=c90195a8" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8159abd6" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=43820e7b" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=9efd6c87" width="100%" alt="exit"></p>
 
 <details><summary>Text version</summary>
 
@@ -15,14 +15,15 @@
 - [LinkedIn: in/adityareddy-dev](https://www.linkedin.com/in/adityareddy-dev)
 - [X: @adityareddydev](https://x.com/adityareddydev)
 - [DEV: @adityareddy_dev](https://dev.to/adityareddy_dev)
+- [Reddit: u/Disastrous-Town-4820](https://www.reddit.com/user/Disastrous-Town-4820)
 - [Email: hello@adityareddy.dev](mailto:hello@adityareddy.dev)
 
 **Stats**
 
 - Stars across repos: 47
-- Contributions, last 365 days: 2,427 (active 333 of 365 days)
-- Pull requests: 180 (122 merged)
-- Streak: 86 days current, 86 longest
+- Contributions, last 365 days: 2,429 (active 334 of 365 days)
+- Pull requests: 165 (111 merged)
+- Streak: 87 days current, 87 longest
 - Followers: 41, forks: 41, public repos: 71, member since Apr 2021 (5y)
 - Top languages: Python (13), HTML (4), Jupyter Notebook (4), TypeScript (4), JavaScript (3)
 
