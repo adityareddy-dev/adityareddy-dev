@@ -70,7 +70,6 @@ LINKS = [
     ("in", "LinkedIn", "in/adityareddy-dev", "https://www.linkedin.com/in/adityareddy-dev"),
     ("x", "X", "@adityareddydev", "https://x.com/adityareddydev"),
     ("dev", "DEV", "@adityareddy_dev", "https://dev.to/adityareddy_dev"),
-    ("rd", "Reddit", "u/Disastrous-Town-4820", "https://www.reddit.com/user/Disastrous-Town-4820"),
     ("mail", "Email", "hello@adityareddy.dev", "mailto:hello@adityareddy.dev"),
 ]
 LANG_TINTS = ["#39FF14", "#2FCB16", "#1F8A18", "#16461A", "#0E3A14"]

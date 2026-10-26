@@ -1,5 +1,5 @@
 <!-- console:start -->
-<p align="center"><img align="top" src="profile/out/boot.svg?v=ddd258d1" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=6c0a5f28" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=f519bbf5" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=7b92d6ec" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=b7c6f003" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=c90195a8" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8159abd6" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=43820e7b" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=9efd6c87" width="100%" alt="exit"></p>
+<p align="center"><img align="top" src="profile/out/boot.svg?v=ddd258d1" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=c1faa467" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=0e147453" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=a396c2c3" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=c0fa4d90" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=b526b6d2" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8159abd6" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=43820e7b" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=9efd6c87" width="100%" alt="exit"></p>
 
 <details><summary>Text version</summary>
 
@@ -15,22 +15,21 @@
 - [LinkedIn: in/adityareddy-dev](https://www.linkedin.com/in/adityareddy-dev)
 - [X: @adityareddydev](https://x.com/adityareddydev)
 - [DEV: @adityareddy_dev](https://dev.to/adityareddy_dev)
-- [Reddit: u/Disastrous-Town-4820](https://www.reddit.com/user/Disastrous-Town-4820)
 - [Email: hello@adityareddy.dev](mailto:hello@adityareddy.dev)
 
 **Stats**
 
-- Stars across repos: 47
-- Contributions, last 365 days: 2,429 (active 334 of 365 days)
-- Pull requests: 165 (111 merged)
-- Streak: 87 days current, 87 longest
-- Followers: 41, forks: 41, public repos: 71, member since Apr 2021 (5y)
+- Stars across repos: 48
+- Contributions, last 365 days: 2,438 (active 335 of 365 days)
+- Pull requests: 172 (115 merged)
+- Streak: 88 days current, 88 longest
+- Followers: 41, forks: 42, public repos: 73, member since Apr 2021 (5y)
 - Top languages: Python (13), HTML (4), Jupyter Notebook (4), TypeScript (4), JavaScript (3)
 
 **Upstream**
 
 - [opentelemetry-demo](https://github.com/open-telemetry/opentelemetry-demo/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged of 2 opened, #3966 Java recommendation service
-- [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js/pulls?q=is%3Apr+author%3Aadityareddy-dev): 1 merged of 3 opened, #7153 drop pagehide listener
+- [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js/pulls?q=is%3Apr+author%3Aadityareddy-dev): 1 merged of 5 opened, #7153 drop pagehide listener
 - [opentelemetry-browser](https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev): 8 merged of 15 opened, #467 nth-child sibling counting
 - [opentelemetry-helm-charts](https://github.com/open-telemetry/opentelemetry-helm-charts/pulls?q=is%3Apr+author%3Aadityareddy-dev): 3 merged of 6 opened, #2421 conflicting event presets
 - [opentelemetry.io](https://github.com/open-telemetry/opentelemetry.io/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged of 5 opened, #11667 demo docs update
@@ -40,7 +39,7 @@
 
 - [deskstudio](https://github.com/adityareddy-dev/deskstudio): Your own design studio inside the coding agent you already use. (41 stars)
 - [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame): Connects slow browser interactions to the React renders and handlers behind them. (4 stars)
-- [otel-js-upgrade](https://github.com/adityareddy-dev/otel-js-upgrade): npx otel-js-upgrade 3 rewrites OpenTelemetry JS SDK 2.x code to 3.0 as a reviewable diff. (2 stars)
+- [otel-js-upgrade](https://github.com/adityareddy-dev/otel-js-upgrade): npx otel-js-upgrade 3 rewrites OpenTelemetry JS SDK 2.x code to 3.0 as a reviewable diff. (3 stars)
 - [adityareddy.dev](https://adityareddy.dev): Personal site and writing index. (0 stars)
 
 **Stack**
