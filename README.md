@@ -1,5 +1,5 @@
 <!-- console:start -->
-<p align="center"><img align="top" src="profile/out/boot.svg?v=ddd258d1" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=c1faa467" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=f348b7d9" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=b8356fde" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=85c9b9f5" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=b526b6d2" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8159abd6" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=21eb6699" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=9efd6c87" width="100%" alt="exit"></p>
+<p align="center"><img align="top" src="profile/out/boot.svg?v=ddd258d1" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=c1faa467" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=deacb324" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=ffae9f50" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=9542f6c9" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=058e5fd5" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8159abd6" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=21eb6699" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=9efd6c87" width="100%" alt="exit"></p>
 
 <details><summary>Text version</summary>
 
@@ -19,25 +19,25 @@
 
 **Stats**
 
-- Stars across repos: 48
-- Contributions, last 365 days: 2,461 (active 338 of 365 days)
-- Pull requests: 172 (117 merged)
-- Streak: 91 days current, 91 longest
-- Followers: 42, forks: 42, public repos: 73, member since Apr 2021 (5y)
-- Top languages: Python (13), TypeScript (5), HTML (4), Jupyter Notebook (4), JavaScript (3)
+- Stars across repos: 49
+- Contributions, last 365 days: 2,500 (active 339 of 365 days)
+- Pull requests: 175 (119 merged)
+- Streak: 94 days current, 94 longest
+- Followers: 42, forks: 42, public repos: 74, member since Apr 2021 (5y)
+- Top languages: Python (13), TypeScript (6), HTML (4), Jupyter Notebook (4), JavaScript (3)
 
 **Upstream**
 
 - [opentelemetry-demo](https://github.com/open-telemetry/opentelemetry-demo/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged of 2 opened, #3966 Java recommendation service
 - [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged of 7 opened, #7153 drop pagehide listener
-- [opentelemetry-browser](https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev): 8 merged of 15 opened, #467 nth-child sibling counting
+- [opentelemetry-browser](https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev): 8 merged of 16 opened, #467 nth-child sibling counting
 - [opentelemetry-helm-charts](https://github.com/open-telemetry/opentelemetry-helm-charts/pulls?q=is%3Apr+author%3Aadityareddy-dev): 3 merged of 6 opened, #2421 conflicting event presets
 - [opentelemetry.io](https://github.com/open-telemetry/opentelemetry.io/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged of 5 opened, #11667 demo docs update
 - [prometheus-community/helm-charts](https://github.com/prometheus-community/helm-charts/pulls?q=is%3Apr+author%3Aadityareddy-dev): 1 merged of 2 opened, #7344 [kube-prometheus-stack] Default Linux-only workloads to kubernetes.io/os: linux
 
 **Projects**
 
-- [deskstudio](https://github.com/adityareddy-dev/deskstudio): Your own design studio inside the coding agent you already use. (41 stars)
+- [deskstudio](https://github.com/adityareddy-dev/deskstudio): Your own design studio inside the coding agent you already use. (42 stars)
 - [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame): Connects slow browser interactions to the React renders and handlers behind them. (4 stars)
 - [otel-js-upgrade](https://github.com/adityareddy-dev/otel-js-upgrade): npx otel-js-upgrade 3 rewrites OpenTelemetry JS SDK 2.x code to 3.0 as a reviewable diff. (3 stars)
 - [adityareddy.dev](https://adityareddy.dev): Personal site and writing index. (0 stars)
