@@ -1,5 +1,5 @@
 <!-- console:start -->
-<p align="center"><img align="top" src="profile/out/boot.svg?v=746ddbf5" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=5e9c0486" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=efbd9f64" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=877fc00f" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=e1fed378" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=4e4194a9" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8caee23f" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=8fc8cc66" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=d269287d" width="100%" alt="exit"></p>
+<p align="center"><img align="top" src="profile/out/boot.svg?v=746ddbf5" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=5e9c0486" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=a5a8e8c2" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=4291df7c" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=81786d13" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=4e4194a9" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8caee23f" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=8fc8cc66" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=d269287d" width="100%" alt="exit"></p>
 
 <details><summary>Text version</summary>
 
@@ -21,7 +21,7 @@
 **Stats**
 
 - Stars across repos: 49
-- Contributions, last 365 days: 2,558 (active 339 of 365 days)
+- Contributions, last 365 days: 2,559 (active 339 of 365 days)
 - Pull requests: 238 (134 merged)
 - Streak: 96 days current, 96 longest
 - Followers: 42, forks: 42, public repos: 81, member since Apr 2021 (5y)
@@ -29,12 +29,12 @@
 
 **Upstream**
 
-- [opentelemetry-browser](https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev): 8 merged of 24 opened, #447 Safari 17 URL parse fix
-- [ecosystem-explorer](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/pulls?q=is%3Apr+author%3Aadityareddy-dev): 7 merged of 11 opened, #1373 JS related package links
-- [collector-contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged of 4 opened, #52068 Faro exporter, v0.164.0
-- [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged of 9 opened, #7153 drop pagehide listener
-- [grafana/alloy](https://github.com/grafana/alloy/pulls?q=is%3Apr+author%3Aadityareddy-dev): 0 merged of 3 opened, #7629 goroutine stack traces
-- [grafana/faro-web-sdk](https://github.com/grafana/faro-web-sdk/pulls?q=is%3Apr+author%3Aadityareddy-dev): 0 merged of 8 opened, #2361 custom web vitals labels
+- [opentelemetry-browser](https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev): 8 merged, 16 open, #447 Safari 17 URL parse fix
+- [ecosystem-explorer](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/pulls?q=is%3Apr+author%3Aadityareddy-dev): 7 merged, 3 open, #1373 JS related package links
+- [collector-contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged, 2 open, #52068 Faro exporter, v0.164.0
+- [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged, 6 open, #7153 drop pagehide listener
+- [grafana/alloy](https://github.com/grafana/alloy/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 open, #7629 goroutine stack traces
+- [grafana/faro-web-sdk](https://github.com/grafana/faro-web-sdk/pulls?q=is%3Apr+author%3Aadityareddy-dev): 6 open, #2361 custom web vitals labels
 
 **Projects**
 
@@ -64,7 +64,7 @@ I'm a senior software engineer in Milwaukee, and I work on browser performance a
 #### Recent
 
 - Go: my [Faro exporter fix](https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/52068) in the OpenTelemetry Collector contrib repo merged October 16, 2026 and shipped in [v0.164.0](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.164.0). More Go is open: [mdatagen README markers](https://github.com/open-telemetry/opentelemetry-collector/pull/16193) in the Collector, Faro translator [fuzz tests](https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/52646) and a fix that [returns the meta encoding error](https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/52647), Alloy [CORS headers for the Faro receiver](https://github.com/grafana/alloy/pull/7618) and [goroutine stack traces in support bundles](https://github.com/grafana/alloy/pull/7629), a k6 [navigation check](https://github.com/grafana/k6/pull/6577), and [list_alerts truncation](https://github.com/prometheus/prometheus-mcp/pull/210) in the Prometheus MCP server.
-- Grafana Faro: five open pull requests in [faro-web-sdk](https://github.com/grafana/faro-web-sdk/pulls?q=is%3Apr+author%3Aadityareddy-dev), covering hard page load navigations ([#2359](https://github.com/grafana/faro-web-sdk/pull/2359)), custom web vitals labels ([#2361](https://github.com/grafana/faro-web-sdk/pull/2361)), custom text masking for session replay ([#2362](https://github.com/grafana/faro-web-sdk/pull/2362)), and the move of tracing setup onto the OpenTelemetry trace SDK ([#2358](https://github.com/grafana/faro-web-sdk/pull/2358), [#2363](https://github.com/grafana/faro-web-sdk/pull/2363)).
+- Grafana Faro: six open pull requests in [faro-web-sdk](https://github.com/grafana/faro-web-sdk/pulls?q=is%3Apr+author%3Aadityareddy-dev), covering hard page load navigations ([#2359](https://github.com/grafana/faro-web-sdk/pull/2359)), custom web vitals labels ([#2361](https://github.com/grafana/faro-web-sdk/pull/2361)), custom text masking for session replay ([#2362](https://github.com/grafana/faro-web-sdk/pull/2362)), and the move of tracing setup onto the OpenTelemetry trace SDK ([#2358](https://github.com/grafana/faro-web-sdk/pull/2358), [#2363](https://github.com/grafana/faro-web-sdk/pull/2363), [#2364](https://github.com/grafana/faro-web-sdk/pull/2364) for the SDK 3.0 upgrade).
 - OpenTelemetry browser SIG: I'm nominated as an approver on [#549](https://github.com/open-telemetry/opentelemetry-browser/pull/549), still open. I have 8 merged pull requests in [opentelemetry-browser](https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev+is%3Amerged), and I've reviewed 62 pull requests across eight OpenTelemetry repos.
 - Safari: the browser SDK wouldn't start on Safari 17 because of `URL.parse`. [#447](https://github.com/open-telemetry/opentelemetry-browser/pull/447) fixed it, and I wrote up why below.
 - Web performance specs: I opened a non-normative section on computing INP for the W3C Event Timing spec ([#175](https://github.com/w3c/event-timing/pull/175)) and moved the CLS explanation in WICG layout-instability to session windows ([#131](https://github.com/WICG/layout-instability/pull/131)). Both are open. Google's web-vitals took three of my fixes.

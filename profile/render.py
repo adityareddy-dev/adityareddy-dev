@@ -176,7 +176,8 @@ def fetch():
             cap = f"#{num} {title}"
         o = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr repo:{full}"), tok)["total_count"]
         m = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr is:merged repo:{full}"), tok)["total_count"]
-        upstream.append({"label": label, "full": full, "caption": cap, "opened": o, "merged": m})
+        op = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr is:open repo:{full}"), tok)["total_count"]
+        upstream.append({"label": label, "full": full, "caption": cap, "opened": o, "merged": m, "open": op})
 
     posts = http(f"https://dev.to/api/articles?username=adityareddy_dev&per_page=5")
     writing = [{"date": p["published_at"][:10], "title": p["title"], "reactions": p["positive_reactions_count"],
@@ -634,6 +635,12 @@ def skyline(doc, d, v):
     return doc.image("skyline.svg", c)
 
 
+def tile_counts(u):
+    if u["merged"] == 0:
+        return fmt(u["open"]), "open"
+    return fmt(u["merged"]), "merged" + (f", {fmt(u['open'])} open" if u["open"] else "")
+
+
 def upstream_rows(doc, d):
     gap, tw, h = 8, 264, 98
     head = 92
@@ -651,9 +658,10 @@ def upstream_rows(doc, d):
             nm = u["label"]
             size = min(14, (tw - 28) / (CW * len(nm)))
             t.text(lp + 14, 28, nm, size, SOFT, 700)
-            t.text(lp + 14, 62, fmt(u["merged"]), 24, ACC, 700)
-            ox = lp + 14 + len(fmt(u["merged"])) * 24 * CW + 8
-            t.text(ox, 62, f"merged · {u['opened']} opened", 11.5, DIM)
+            big, small = tile_counts(u)
+            t.text(lp + 14, 62, big, 24, ACC, 700)
+            ox = lp + 14 + len(big) * 24 * CW + 8
+            t.text(ox, 62, small, 11.5, DIM)
             t.text(lp + 14, 84, fit(u["caption"], 11.5, tw - 28), 11.5, DIM)
             place(c, t, x, head + r * (h + gap))
             x += w
@@ -773,6 +781,12 @@ def img_tag(it, ver):
     return f'<a href="{it["href"]}">{t}</a>' if it["href"] else t
 
 
+def tile_text(u):
+    if u["merged"] == 0:
+        return f"{u['open']} open"
+    return f"{u['merged']} merged" + (f", {u['open']} open" if u["open"] else "")
+
+
 def text_version(d, v):
     L = []
     L.append("**Aditya Reddy**\n")
@@ -789,7 +803,7 @@ def text_version(d, v):
           "- Top languages: " + ", ".join(f"{k} ({n})" for k, n in v["langs"])]
     L.append("\n**Upstream**\n")
     for u in d["upstream"]:
-        L.append(f"- [{u['label']}](https://github.com/{u['full']}/pulls?q=is%3Apr+author%3A{USER}): {u['merged']} merged of {u['opened']} opened, {clean(u['caption'])}")
+        L.append(f"- [{u['label']}](https://github.com/{u['full']}/pulls?q=is%3Apr+author%3A{USER}): {tile_text(u)}, {clean(u['caption'])}")
     L.append("\n**Projects**\n")
     for pr in PROJECTS:
         name, tag, desc, lang, stars_n, url = project_card(v, *pr)
