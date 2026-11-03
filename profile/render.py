@@ -38,32 +38,39 @@ LINE = "rgba(57,255,20,.35)"
 CW = 0.6  # JetBrains Mono advance in em
 
 UPSTREAM = [
-    ("opentelemetry-demo", "open-telemetry/opentelemetry-demo", "#3966 Java recommendation service", 3966),
+    ("opentelemetry-browser", "open-telemetry/opentelemetry-browser", "#447 Safari 17 URL parse fix", 447),
+    ("ecosystem-explorer", "open-telemetry/opentelemetry-ecosystem-explorer", "#1373 JS related package links", 1373),
+    ("collector-contrib", "open-telemetry/opentelemetry-collector-contrib", "#52068 Faro exporter, v0.164.0", 52068),
     ("opentelemetry-js", "open-telemetry/opentelemetry-js", "#7153 drop pagehide listener", 7153),
-    ("opentelemetry-browser", "open-telemetry/opentelemetry-browser", "#467 nth-child sibling counting", 467),
-    ("opentelemetry-helm-charts", "open-telemetry/opentelemetry-helm-charts", "#2421 conflicting event presets", 2421),
-    ("opentelemetry.io", "open-telemetry/opentelemetry.io", "#11667 demo docs update", 11667),
-    ("prometheus-community/helm-charts", "prometheus-community/helm-charts", None, 7344),
+    ("grafana/alloy", "grafana/alloy", "#7629 goroutine stack traces", 7629),
+    ("grafana/faro-web-sdk", "grafana/faro-web-sdk", "#2361 custom web vitals labels", 2361),
 ]
 PROJECTS = [
-    ("deskstudio", "OPEN SOURCE", "Your own design studio inside the coding agent you already use."),
+    ("deskstudio", "OPEN SOURCE", "Your own design studio inside the coding agent you already use. deskstudio.ai"),
+    ("system-designer", "BROWSER GAME", "A free game for practicing system design, from short lessons to full problems. systemdesigner.io"),
     ("react-inp-blame", "DEVTOOLS", "Connects slow browser interactions to the React renders and handlers behind them."),
-    ("otel-js-upgrade", "OPEN SOURCE", "npx otel-js-upgrade 3 rewrites OpenTelemetry JS SDK 2.x code to 3.0 as a reviewable diff."),
-    ("adityareddy-dev.github.io", "SITE", "Personal site and writing index."),
+    ("adityareddy-dev.github.io", "BROWSER GAME", "A Day in the Life of Adi, a small 3D game about one working day. The resume is in the phone."),
 ]
 # repo name -> (shown name, link) where the card is not a plain repo link
-PROJECT_OVERRIDE = {"adityareddy-dev.github.io": ("adityareddy.dev", "https://adityareddy.dev")}
+PROJECT_OVERRIDE = {
+    "deskstudio": ("deskstudio", "https://deskstudio.ai"),
+    "system-designer": ("system-designer", "https://systemdesigner.io"),
+    "adityareddy-dev.github.io": ("adityareddy.dev", "https://adityareddy.dev"),
+}
+NO_REPO = {"system-designer"}
 
 
 def project_card(v, name, tag, desc):
     r = v["repo_by_name"].get(name, {})
     shown, url = PROJECT_OVERRIDE.get(name, (name, f"https://github.com/{USER}/{name}"))
+    if name in NO_REPO:
+        return shown, tag, desc, "", None, url
     return shown, tag, desc, r.get("language") or "", r.get("stargazers_count", 0), url
 STACK = [
-    ("languages", ["TypeScript", "JavaScript", "Python", "Java"]),
+    ("languages", ["TypeScript", "Go", "JavaScript", "Python", "Java"]),
     ("frameworks", ["React", "Spring Boot", "Helm"]),
-    ("observability", ["OpenTelemetry", "Prometheus"]),
-    ("front-end", ["Event Timing", "Long Animation Frames", "Chrome Performance panel", "React Profiler"]),
+    ("observability", ["OpenTelemetry", "Grafana Faro", "Alloy", "k6", "Prometheus"]),
+    ("front-end", ["Event Timing", "Long Animation Frames", "Web Vitals", "Safari fixes", "React Profiler"]),
 ]
 LINKS = [
     ("gh", "GitHub", "adityareddy-dev", "https://github.com/adityareddy-dev"),
@@ -162,27 +169,14 @@ def fetch():
     prs_all = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr"), tok)["total_count"]
     prs_merged = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr is:merged"), tok)["total_count"]
 
-    up_all = search_prs(f"author:{USER} is:pr org:open-telemetry", tok)
-    up_merged = search_prs(f"author:{USER} is:pr is:merged org:open-telemetry", tok)
-    pr_all = search_prs(f"author:{USER} is:pr org:prometheus-community", tok)
-    pr_merged = search_prs(f"author:{USER} is:pr is:merged org:prometheus-community", tok)
-    up_all += pr_all
-    up_merged += pr_merged
-
-    def tally(items):
-        c = {}
-        for it in items:
-            key = it["repository_url"].split("/repos/")[1]
-            c[key] = c.get(key, 0) + 1
-        return c
-    opened, merged = tally(up_all), tally(up_merged)
     upstream = []
     for label, full, cap, num in UPSTREAM:
         if cap is None:
             title = gh_get(f"/repos/{full}/pulls/{num}", tok)["title"]
             cap = f"#{num} {title}"
-        upstream.append({"label": label, "full": full, "caption": cap,
-                         "opened": opened.get(full, 0), "merged": merged.get(full, 0)})
+        o = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr repo:{full}"), tok)["total_count"]
+        m = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr is:merged repo:{full}"), tok)["total_count"]
+        upstream.append({"label": label, "full": full, "caption": cap, "opened": o, "merged": m})
 
     posts = http(f"https://dev.to/api/articles?username=adityareddy_dev&per_page=5")
     writing = [{"date": p["published_at"][:10], "title": p["title"], "reactions": p["positive_reactions_count"],
@@ -433,7 +427,7 @@ def place(c, tile, x, y):
 
 # ---------------------------------------------------------------- sections
 def boot(doc, d):
-    h = 290
+    h = 318
     c = Canvas(WIDTH, h, 0, doc.y, left=True, right=True, top=True, label="boot, SYS://ADITYAREDDY.DEV")
     c.add(f'<rect x="0" y="0" width="{WIDTH}" height="36" fill="{PANEL}"/><rect x="0" y="36" width="{WIDTH}" height="1" fill="rgba(57,255,20,.5)"/>')
     c.text(PAD, 23, "SYS://ADITYAREDDY.DEV // NODE:ADI", 12, DIM)
@@ -447,13 +441,13 @@ def boot(doc, d):
     nm = "ADITYA REDDY"
     c.add(f'<text class="glow" x="{PAD}" y="160" font-size="60" font-weight="700" fill="{ACC}" letter-spacing="1.2" filter="url(#blur)">{nm}</text>')
     c.add(f'<text x="{PAD}" y="160" font-size="60" font-weight="700" fill="{WH}" letter-spacing="1.2">{nm}</text>')
-    lines = ["frontend performance engineer", "OpenTelemetry JS contributor", "Milwaukee, WI · adityareddy.dev"]
+    lines = ["senior software engineer, web performance", "OpenTelemetry and Grafana contributor, Go and TypeScript", "Looking for my next role in browser engineering or web performance, Denver preferred", "Milwaukee, WI · adityareddy.dev"]
     for i, ln in enumerate(lines):
         y = 204 + i * 28
         c.add(f'<text x="{PAD}" y="{y}" font-size="14" fill="{ACC}">&gt;&gt;</text>')
         c.text(PAD + 3 * 14 * CW, y, ln, 14, FG)
-    cx = PAD + 3 * 14 * CW + len(clean(lines[2])) * 14 * CW + 8
-    c.add(f'<rect class="cur" x="{cx:g}" y="{204 + 56 - 12}" width="9" height="16" fill="{ACC}"/>')
+    cx = PAD + 3 * 14 * CW + len(clean(lines[-1])) * 14 * CW + 8
+    c.add(f'<rect class="cur" x="{cx:g}" y="{204 + 28 * (len(lines) - 1) - 12}" width="9" height="16" fill="{ACC}"/>')
     corners(c, top=True)
     return doc.image("boot.svg", c)
 
@@ -644,7 +638,7 @@ def upstream_rows(doc, d):
     gap, tw, h = 8, 264, 98
     head = 92
     c = Canvas(WIDTH, head + 2 * h + gap + 26, 0, doc.y, left=True, right=True, top=True, label="04 upstream")
-    section_head_draw(c, "04", "upstream", "gh pr list --author adityareddy-dev --state merged --org open-telemetry", 22)
+    section_head_draw(c, "04", "upstream", "gh pr list --author adityareddy-dev --state all --repo open-telemetry/* grafana/*", 22)
     for r in range(2):
         x = 0
         for i in range(3):
@@ -693,8 +687,9 @@ def project_rows(doc, d, v):
             label = (lang + " · ") if lang else ""
             t.text(lp + 14, ty, label, 11.5, DIM)
             sx = lp + 14 + len(label) * 11.5 * CW
-            star(t, sx + 5, ty - 4, 5)
-            t.text(sx + 14, ty, str(stars_n), 11.5, ACC)
+            if stars_n is not None:
+                star(t, sx + 5, ty - 4, 5)
+                t.text(sx + 14, ty, str(stars_n), 11.5, ACC)
             place(c, t, x, head + r * (h + gap))
             x += w
     doc.row([doc.image("projects.svg", c, "https://github.com/adityareddy-dev?tab=repositories")])
@@ -781,7 +776,7 @@ def img_tag(it, ver):
 def text_version(d, v):
     L = []
     L.append("**Aditya Reddy**\n")
-    L += ["- frontend performance engineer", "- OpenTelemetry JS contributor", "- Milwaukee, WI · [adityareddy.dev](https://adityareddy.dev)\n"]
+    L += ["- senior software engineer, web performance", "- OpenTelemetry and Grafana contributor, Go and TypeScript", "- Looking for my next role in browser engineering or web performance, Denver preferred", "- Milwaukee, WI · [adityareddy.dev](https://adityareddy.dev)\n"]
     L.append("**Links**\n")
     for k, name, handle, url in LINKS:
         L.append(f"- [{name}: {handle}]({url})")
@@ -798,7 +793,7 @@ def text_version(d, v):
     L.append("\n**Projects**\n")
     for pr in PROJECTS:
         name, tag, desc, lang, stars_n, url = project_card(v, *pr)
-        L.append(f"- [{name}]({url}): {desc} ({stars_n} stars)")
+        L.append(f"- [{name}]({url}): {desc}" + ("" if stars_n is None else f" ({stars_n} stars)"))
     L.append("\n**Stack**\n")
     for lab, chips in STACK:
         L.append(f"- {lab}: {', '.join(chips)}")
