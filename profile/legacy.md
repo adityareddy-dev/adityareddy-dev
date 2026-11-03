@@ -28,7 +28,7 @@ I'm a senior software engineer in Milwaukee, and I work on browser performance a
 ## Projects
 
 - [Desk Studio](https://deskstudio.ai): a design studio inside the coding agent you already use. Free, and nothing leaves your machine but the model calls you already make.
-- System Designer, at systemdesigner.io: a free browser game for practicing system design.
+- [System Designer](https://systemdesigner.io): a free browser game for practicing system design. Pick a real problem, draw the system, then watch a full day of traffic hit it.
 - [adityareddy.dev](https://adityareddy.dev) is a small 3D browser game about one working day. The resume is in the phone.
 - [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame): connects slow browser interactions to React renders and handlers when it can identify them.
 - [otel-js-upgrade](https://github.com/adityareddy-dev/otel-js-upgrade): reviewable migration diffs for OpenTelemetry JavaScript. It applies supported SDK 2.12 changes and previews SDK 3 migrations.
