@@ -1,5 +1,5 @@
 <!-- console:start -->
-<p align="center"><img align="top" src="profile/out/boot.svg?v=746ddbf5" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=5e9c0486" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=a5a8e8c2" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=4291df7c" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=81786d13" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=4e4194a9" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8caee23f" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=8fc8cc66" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=d269287d" width="100%" alt="exit"></p>
+<p align="center"><img align="top" src="profile/out/boot.svg?v=746ddbf5" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=5e9c0486" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=16b2e2b5" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=5073a00d" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=81786d13" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=c1d260da" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8caee23f" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=8fc8cc66" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=d269287d" width="100%" alt="exit"></p>
 
 <details><summary>Text version</summary>
 
@@ -20,9 +20,9 @@
 
 **Stats**
 
-- Stars across repos: 49
-- Contributions, last 365 days: 2,559 (active 339 of 365 days)
-- Pull requests: 238 (134 merged)
+- Stars across repos: 50
+- Contributions, last 365 days: 2,563 (active 339 of 365 days)
+- Pull requests: 230 (127 merged)
 - Streak: 96 days current, 96 longest
 - Followers: 42, forks: 42, public repos: 81, member since Apr 2021 (5y)
 - Top languages: Python (14), TypeScript (6), HTML (4), Jupyter Notebook (4), JavaScript (3)
@@ -38,7 +38,7 @@
 
 **Projects**
 
-- [deskstudio](https://deskstudio.ai): Your own design studio inside the coding agent you already use. deskstudio.ai (42 stars)
+- [deskstudio](https://deskstudio.ai): Your own design studio inside the coding agent you already use. deskstudio.ai (43 stars)
 - [system-designer](https://systemdesigner.io): A free game for practicing system design, from short lessons to full problems. systemdesigner.io
 - [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame): Connects slow browser interactions to the React renders and handlers behind them. (4 stars)
 - [adityareddy.dev](https://adityareddy.dev): A Day in the Life of Adi, a small 3D game about one working day. The resume is in the phone. (0 stars)
@@ -87,7 +87,7 @@ I'm a senior software engineer in Milwaukee, and I work on browser performance a
 #### Projects
 
 - [Desk Studio](https://deskstudio.ai): a design studio inside the coding agent you already use. Free, and nothing leaves your machine but the model calls you already make.
-- System Designer, at systemdesigner.io: a free browser game for practicing system design.
+- [System Designer](https://systemdesigner.io): a free browser game for practicing system design. Pick a real problem, draw the system, then watch a full day of traffic hit it.
 - [adityareddy.dev](https://adityareddy.dev) is a small 3D browser game about one working day. The resume is in the phone.
 - [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame): connects slow browser interactions to React renders and handlers when it can identify them.
 - [otel-js-upgrade](https://github.com/adityareddy-dev/otel-js-upgrade): reviewable migration diffs for OpenTelemetry JavaScript. It applies supported SDK 2.12 changes and previews SDK 3 migrations.
