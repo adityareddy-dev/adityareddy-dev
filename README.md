@@ -1,5 +1,5 @@
 <!-- console:start -->
-<p align="center"><img align="top" src="profile/out/boot.svg?v=746ddbf5" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=5e9c0486" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=16b2e2b5" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=5073a00d" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=81786d13" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=c1d260da" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8caee23f" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=8fc8cc66" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=d269287d" width="100%" alt="exit"></p>
+<p align="center"><img align="top" src="profile/out/boot.svg?v=746ddbf5" width="100%" alt="boot, SYS://ADITYAREDDY.DEV"><a href="https://adityareddy.dev"><img align="top" src="profile/out/links.svg?v=5e9c0486" width="100%" alt="01 links"></a><img align="top" src="profile/out/stats.svg?v=c3a20d87" width="100%" alt="stats"><img align="top" src="profile/out/skyline.svg?v=db4156e0" width="100%" alt="contribution skyline, one building per day"><a href="https://github.com/pulls?q=is%3Apr+author%3Aadityareddy-dev+org%3Aopen-telemetry+is%3Amerged"><img align="top" src="profile/out/upstream.svg?v=bd2293de" width="100%" alt="04 upstream"></a><a href="https://github.com/adityareddy-dev?tab=repositories"><img align="top" src="profile/out/projects.svg?v=07881d90" width="100%" alt="05 projects"></a><img align="top" src="profile/out/stack.svg?v=8caee23f" width="100%" alt="stack"><a href="https://dev.to/adityareddy_dev"><img align="top" src="profile/out/writing.svg?v=8fc8cc66" width="100%" alt="07 writing"></a><img align="top" src="profile/out/exit.svg?v=d269287d" width="100%" alt="exit"></p>
 
 <details><summary>Text version</summary>
 
@@ -20,27 +20,27 @@
 
 **Stats**
 
-- Stars across repos: 50
-- Contributions, last 365 days: 2,563 (active 339 of 365 days)
-- Pull requests: 230 (127 merged)
-- Streak: 96 days current, 96 longest
-- Followers: 42, forks: 42, public repos: 81, member since Apr 2021 (5y)
-- Top languages: Python (14), TypeScript (6), HTML (4), Jupyter Notebook (4), JavaScript (3)
+- Stars across repos: 54
+- Contributions, last 365 days: 2,766 (active 339 of 365 days)
+- Pull requests: 356 (167 merged)
+- Streak: 98 days current, 98 longest
+- Followers: 46, forks: 47, public repos: 113, member since Apr 2021 (5y)
+- Top languages: Python (14), TypeScript (6), HTML (4), JavaScript (4), Jupyter Notebook (4)
 
 **Upstream**
 
-- [opentelemetry-browser](https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev): 8 merged, 16 open, #447 Safari 17 URL parse fix
-- [ecosystem-explorer](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/pulls?q=is%3Apr+author%3Aadityareddy-dev): 7 merged, 3 open, #1373 JS related package links
-- [collector-contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged, 2 open, #52068 Faro exporter, v0.164.0
-- [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 merged, 6 open, #7153 drop pagehide listener
+- [opentelemetry-browser](https://github.com/open-telemetry/opentelemetry-browser/pulls?q=is%3Apr+author%3Aadityareddy-dev): 8 merged, 15 open, #447 Safari 17 URL parse fix
+- [ecosystem-explorer](https://github.com/open-telemetry/opentelemetry-ecosystem-explorer/pulls?q=is%3Apr+author%3Aadityareddy-dev): 12 merged, #1373 JS related package links
+- [collector-contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib/pulls?q=is%3Apr+author%3Aadityareddy-dev): 4 merged, 2 open, #52068 Faro exporter, v0.164.0
+- [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js/pulls?q=is%3Apr+author%3Aadityareddy-dev): 4 merged, 4 open, #7153 drop pagehide listener
 - [grafana/alloy](https://github.com/grafana/alloy/pulls?q=is%3Apr+author%3Aadityareddy-dev): 2 open, #7629 goroutine stack traces
-- [grafana/faro-web-sdk](https://github.com/grafana/faro-web-sdk/pulls?q=is%3Apr+author%3Aadityareddy-dev): 6 open, #2361 custom web vitals labels
+- [grafana/faro-web-sdk](https://github.com/grafana/faro-web-sdk/pulls?q=is%3Apr+author%3Aadityareddy-dev): 1 merged, 6 open, #2361 custom web vitals labels
 
 **Projects**
 
 - [deskstudio](https://deskstudio.ai): Your own design studio inside the coding agent you already use. deskstudio.ai (43 stars)
 - [system-designer](https://systemdesigner.io): A free game for practicing system design, from short lessons to full problems. systemdesigner.io
-- [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame): Connects slow browser interactions to the React renders and handlers behind them. (4 stars)
+- [react-inp-blame](https://github.com/adityareddy-dev/react-inp-blame): Connects slow browser interactions to the React renders and handlers behind them. (8 stars)
 - [adityareddy.dev](https://adityareddy.dev): A Day in the Life of Adi, a small 3D game about one working day. The resume is in the phone. (0 stars)
 
 **Stack**
