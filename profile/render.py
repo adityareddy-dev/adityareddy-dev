@@ -38,8 +38,8 @@ LINE = "rgba(57,255,20,.35)"
 CW = 0.6  # JetBrains Mono advance in em
 
 UPSTREAM = [
-    ("opentelemetry-browser", "open-telemetry/opentelemetry-browser", "#447 Safari 17 URL parse fix", 447),
-    ("ecosystem-explorer", "open-telemetry/opentelemetry-ecosystem-explorer", "#1373 JS related package links", 1373),
+    ("opentelemetry-browser", "open-telemetry/opentelemetry-browser", "#564 page load joins server trace", 564),
+    ("ecosystem-explorer", "open-telemetry/opentelemetry-ecosystem-explorer", "#1437 Java agent event details", 1437),
     ("collector-contrib", "open-telemetry/opentelemetry-collector-contrib", "#52068 Faro exporter, v0.164.0", 52068),
     ("opentelemetry-js", "open-telemetry/opentelemetry-js", "#7153 drop pagehide listener", 7153),
     ("grafana/alloy", "grafana/alloy", "#7629 goroutine stack traces", 7629),
@@ -47,7 +47,7 @@ UPSTREAM = [
 ]
 PROJECTS = [
     ("deskstudio", "OPEN SOURCE", "Your own design studio inside the coding agent you already use. deskstudio.ai"),
-    ("system-designer", "BROWSER GAME", "A free game for practicing system design, from short lessons to full problems. systemdesigner.io"),
+    ("system-designer", "BROWSER GAME", "Build a system and replay a day of traffic. Free to play as a guest at systemdesigner.io."),
     ("react-inp-blame", "DEVTOOLS", "Connects slow browser interactions to the React renders and handlers behind them."),
     ("adityareddy-dev.github.io", "BROWSER GAME", "A Day in the Life of Adi, a small 3D game about one working day. The resume is in the phone."),
 ]
@@ -57,15 +57,14 @@ PROJECT_OVERRIDE = {
     "system-designer": ("system-designer", "https://systemdesigner.io"),
     "adityareddy-dev.github.io": ("adityareddy.dev", "https://adityareddy.dev"),
 }
-NO_REPO = {"system-designer"}
 
 
 def project_card(v, name, tag, desc):
     r = v["repo_by_name"].get(name, {})
     shown, url = PROJECT_OVERRIDE.get(name, (name, f"https://github.com/{USER}/{name}"))
-    if name in NO_REPO:
-        return shown, tag, desc, "", None, url
-    return shown, tag, desc, r.get("language") or "", r.get("stargazers_count", 0), url
+    return shown, tag, desc, r.get("language") or "", r.get("stargazers_count"), url
+
+
 STACK = [
     ("languages", ["TypeScript", "Go", "JavaScript", "Python", "Java"]),
     ("frameworks", ["React", "Spring Boot", "Helm"]),
@@ -166,8 +165,9 @@ def fetch():
 
     pub_days = public_days(repos, tok, now)
 
-    prs_all = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr"), tok)["total_count"]
-    prs_merged = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(f"author:{USER} is:pr is:merged"), tok)["total_count"]
+    public_prs = f"author:{USER} is:pr is:public"
+    prs_all = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(public_prs), tok)["total_count"]
+    prs_merged = gh_get("/search/issues?per_page=1&q=" + urllib.parse.quote(public_prs + " is:merged"), tok)["total_count"]
 
     upstream = []
     for label, full, cap, num in UPSTREAM:
@@ -442,7 +442,7 @@ def boot(doc, d):
     nm = "ADITYA REDDY"
     c.add(f'<text class="glow" x="{PAD}" y="160" font-size="60" font-weight="700" fill="{ACC}" letter-spacing="1.2" filter="url(#blur)">{nm}</text>')
     c.add(f'<text x="{PAD}" y="160" font-size="60" font-weight="700" fill="{WH}" letter-spacing="1.2">{nm}</text>')
-    lines = ["senior software engineer, web performance", "OpenTelemetry and Grafana contributor, Go and TypeScript", "Looking for my next role in browser engineering or web performance, Denver preferred", "Milwaukee, WI · adityareddy.dev"]
+    lines = ["senior software engineer, web performance and observability", "OpenTelemetry Browser approver and Grafana contributor, Go and TypeScript", "Looking for my next role in browser engineering or web performance, Denver preferred", "Milwaukee, WI · adityareddy.dev"]
     for i, ln in enumerate(lines):
         y = 204 + i * 28
         c.add(f'<text x="{PAD}" y="{y}" font-size="14" fill="{ACC}">&gt;&gt;</text>')
@@ -496,9 +496,9 @@ def stats(doc, d, v):
     c = Canvas(WIDTH, h, 0, doc.y, left=True, right=True, top=True, label="stats")
     section_head_draw(c, "02", "stats", "gh stats --user adityareddy-dev", 22)
     tiles = [
-        ("TOTAL STARS", fmt(v["stars"]), "across all repos"),
+        ("TOTAL STARS", fmt(v["stars"]), "non-fork repos"),
         ("CONTRIBUTIONS · 365D", fmt(v["total"]), f"active {v['active']} of {len(v['days'])} days"),
-        ("PULL REQUESTS", fmt(d["prs"]), f"{fmt(d['merged'])} merged"),
+        ("PUBLIC PRS", fmt(d["prs"]), f"{fmt(d['merged'])} merged"),
         ("CURRENT STREAK", f"{v['streak']}d", f"longest: {v['longest']}d"),
     ]
     tw, gap, y = 193, 12, 22 + 92
@@ -790,16 +790,17 @@ def tile_text(u):
 def text_version(d, v):
     L = []
     L.append("**Aditya Reddy**\n")
-    L += ["- senior software engineer, web performance", "- OpenTelemetry and Grafana contributor, Go and TypeScript", "- Looking for my next role in browser engineering or web performance, Denver preferred", "- Milwaukee, WI · [adityareddy.dev](https://adityareddy.dev)\n"]
+    L += ["- senior software engineer, web performance and observability", "- OpenTelemetry Browser approver and Grafana contributor, Go and TypeScript", "- Looking for my next role in browser engineering or web performance, Denver preferred", "- Milwaukee, WI · [adityareddy.dev](https://adityareddy.dev)\n"]
     L.append("**Links**\n")
     for k, name, handle, url in LINKS:
         L.append(f"- [{name}: {handle}]({url})")
     L.append("\n**Stats**\n")
-    L += [f"- Stars across repos: {fmt(v['stars'])}",
+    L.append(f"GitHub snapshot from {d['now']:%Y-%m-%d} UTC. Activity counts commits in my public, non-archived source repos and the public pull requests and issues I opened.\n")
+    L += [f"- Stars on public non-fork repos: {fmt(v['stars'])}",
           f"- Contributions, last 365 days: {fmt(v['total'])} (active {v['active']} of {len(v['days'])} days)",
-          f"- Pull requests: {fmt(d['prs'])} ({fmt(d['merged'])} merged)",
+          f"- Public pull requests: {fmt(d['prs'])} ({fmt(d['merged'])} merged)",
           f"- Streak: {v['streak']} days current, {v['longest']} longest",
-          f"- Followers: {fmt(d['user']['followers'])}, forks: {fmt(v['forks'])}, public repos: {fmt(d['user']['public_repos'])}, member since {v['member']}",
+          f"- Followers: {fmt(d['user']['followers'])}, forks of my source repos: {fmt(v['forks'])}, public repos: {fmt(d['user']['public_repos'])}, member since {v['member']}",
           "- Top languages: " + ", ".join(f"{k} ({n})" for k, n in v["langs"])]
     L.append("\n**Upstream**\n")
     for u in d["upstream"]:
@@ -812,6 +813,7 @@ def text_version(d, v):
     for lab, chips in STACK:
         L.append(f"- {lab}: {', '.join(chips)}")
     L.append("\n**Writing**\n")
+    L.append("- 2026-11-20 [How I Traced a Missing Vercel AI SDK Duration Histogram](https://hackernoon.com/how-i-traced-a-missing-vercel-ai-sdk-duration-histogram) (HackerNoon)")
     for p in d["writing"]:
         L.append(f"- {p['date']} [{clean(p['title'])}]({p['url']}) ({p['reactions']} reactions, {p['comments']} comments)")
     L.append("- [All articles on DEV](https://dev.to/adityareddy_dev)")
@@ -820,7 +822,7 @@ def text_version(d, v):
         with open(legacy, encoding="utf-8") as fh:
             lines = fh.read().splitlines()
         body = "\n".join(re.sub(r"^## ", "#### ", ln) for ln in lines[1:])
-        L.append("\n**Earlier README**\n")
+        L.append("\n**More about my work**\n")
         L.append(body.strip())
     return "\n".join(L)
 
